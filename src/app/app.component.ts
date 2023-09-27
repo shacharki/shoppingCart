@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shoppingCart';
+  shoulDisplayProduct: boolean = true;
+
+  toggleProductComponent() {
+    this.shoulDisplayProduct = !this.shoulDisplayProduct;
+  }
 }
