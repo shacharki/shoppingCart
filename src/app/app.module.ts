@@ -9,13 +9,15 @@ import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { TemplateRegistrationFormsComponent } from './components/template-registration-forms/template-registration-forms.component';
 import { FormsModule } from '@angular/forms';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     ProductComponent,
     CartComponent,
-    TemplateRegistrationFormsComponent
+    TemplateRegistrationFormsComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
