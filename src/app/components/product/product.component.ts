@@ -1,19 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from '../models/product.interface';
 
-export interface Product {
-  name: string;
-  price: number;
-  image: ImageBitmap;
-}
+
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
-constructor(){}
-ngOnInit(): void {
-  console.log("ProductComponent work")
-}
+
+
+export class ProductComponent {
+  constructor() { }
+
+
+
+  @Input() product!: Product;
+
+  public addProduct(event: Event): void{    
+    // this.product = {
+    //   name: 'bread',
+    //   price: 15,
+    //   image: 'bread image',
+    //   cart: false,
+    // }
+  }
 }
