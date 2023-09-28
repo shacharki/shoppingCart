@@ -1,11 +1,11 @@
 <div class="products">
     {{ title }}
     <app-product 
-    *ngFor="let product of listOfProducts
+    *ngFor="let product of products;
     let i = index" 
     [product]="product">
     </app-product>
-    <app-cart *ngFor="let product of listOfProducts
+    <app-cart *ngFor="let product of products;
      let i = index" [product]="product"
     [productIndex]="i" (onDeleteProduct)="deleteProduct($event)"></app-cart>
 </div>

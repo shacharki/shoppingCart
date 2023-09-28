@@ -7,17 +7,20 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './components/products/products.components';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
-
+import { TemplateRegistrationFormsComponent } from './components/template-registration-forms/template-registration-forms.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    TemplateRegistrationFormsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
