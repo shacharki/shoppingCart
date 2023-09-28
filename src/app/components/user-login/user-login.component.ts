@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-login.component.scss']
 })
 export class UserLoginComponent implements OnInit {
+  
   signUpUsers: any[] = [];
   signupObj: any = {
     userName: '',
@@ -17,7 +19,7 @@ export class UserLoginComponent implements OnInit {
     userName: '',
     password: '',
   };
-  constructor() {
+  constructor(private router: Router) {
 
   }
 
@@ -42,6 +44,7 @@ export class UserLoginComponent implements OnInit {
     const isUserExsist = this.signUpUsers.find(m => m.userName == this.loginObj.userName && m.password == this.loginObj.password)
     if (isUserExsist != undefined) {
       alert('user login successfully');
+      this.router.navigate(['/home']);
     } else {
       alert('worng credentials');
 
