@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges,OnChanges,AfterViewInit,OnDestroy } from '@angular/core'
+import { Component, Input, OnInit, SimpleChanges, OnChanges, AfterViewInit, OnDestroy } from '@angular/core'
 import { Product } from '../models/product.interface';
 
 @Component({
@@ -8,9 +8,9 @@ import { Product } from '../models/product.interface';
 
 })
 
-export class ProductsComponent implements OnInit,OnChanges,AfterViewInit,OnDestroy {
+export class ProductsComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     title = 'Shopping Cart:';
-    public listOfProducts: Product[] =[
+    public listOfProducts: Product[] = [
         {
             name: 'bread',
             price: 15,
@@ -30,10 +30,18 @@ export class ProductsComponent implements OnInit,OnChanges,AfterViewInit,OnDestr
             cart: false
         }
     ]
-    
 
+    public deleteProduct(productIndex: number): void {
+        this.listOfProducts
+    //      this.listOfProducts = {
+    //   name: 'bread',
+    //   price: 15,
+    //   image: 'bread image',
+    //   cart: false,
+    // }
+
+    } 
     ngOnInit() {
-        console.log("Products on init")
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -41,10 +49,8 @@ export class ProductsComponent implements OnInit,OnChanges,AfterViewInit,OnDestr
     }
 
     ngAfterViewInit() {
-        console.log("after view init")
     }
 
     ngOnDestroy(): void {
-        console.log("On Destroy")
     }
 }

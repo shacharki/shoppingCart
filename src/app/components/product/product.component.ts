@@ -16,6 +16,7 @@ export class ProductComponent {
 
 
   @Input() product!: Product;
+  @Input() type!: boolean;
 
   public addProduct(event: Event): void{    
     // this.product = {
