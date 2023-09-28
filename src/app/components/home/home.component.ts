@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   productList!: any[];
   products: any[] = [];
   subTotal!: any;
+  isProducts: boolean = true;
   constructor(
     private product_service: ProductService, 
     private router: Router
@@ -25,9 +26,9 @@ export class HomeComponent implements OnInit {
         alert(error);
       },
       complete: () => {
-        console.log("Reqoest Completed");
+        console.log("Request Completed");
       },
-    })
+    });
     this.product_service.loadCart();
     this.products = this.product_service.getProduct();
   }
@@ -36,10 +37,20 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
 
   }
-
+  showCrat(){
+    this.isProducts = false
+  }
+  showProduct(){
+    this.isProducts = true
+  }
   
   addToCart(product: any){
-
+    if (!this.product_service.productInCart(product)) {
+      product.quantity = 1;
+      this.product_service.addToCart(product);
+      this.products = [...this.product_service.getProduct()];
+      this.subTotal = product.price;
+    }
   }
 
   removeFromCart(product: any) {
