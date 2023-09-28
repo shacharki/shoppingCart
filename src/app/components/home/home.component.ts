@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     this.product_service.getAllProducts().subscribe({
       next: (res: any) => {
         console.log(res);
+        this.productList = res;
       },
       error: (error) => {
         alert(error);
@@ -27,18 +28,23 @@ export class HomeComponent implements OnInit {
         console.log("Reqoest Completed");
       },
     })
-   
+    this.product_service.loadCart();
+    this.products = this.product_service.getProduct();
   }
 
-  checkout(){
+  logout(){
+    this.router.navigate(['/login']);
 
   }
+
+  
   addToCart(product: any){
 
   }
 
   removeFromCart(product: any) {
-   
+    this.product_service.removeProduct(product);
+    this.products = this.product_service.getProduct();
   }
   get total() {
     return this.products?.reduce(

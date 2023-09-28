@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Product } from '../models/product.interface';
 
 @Component({
   selector: 'app-cart',
@@ -8,7 +7,6 @@ import { Product } from '../models/product.interface';
 })
 export class CartComponent {
 
-  @Input() product!: Product;
   @Input() productIndex!: number;
   
 @Output() onDeleteProduct: EventEmitter<number> = new EventEmitter();
