@@ -10,16 +10,9 @@ import { Router } from '@angular/router';
 export class RegistrationComponent implements OnInit {
 
   regForm: FormGroup;
-  submitted = false;
-
-  isDisabled: boolean = true;
+  submitted: boolean = false;
+  isUserExsist: boolean = false;
   signUpUsers: any[] = [];
-  signupObj: any = {
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  };
 
   constructor(private router: Router, private fb: FormBuilder) {
     this.regForm = this.fb.group({
@@ -28,9 +21,17 @@ export class RegistrationComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, {
-      validators: [this.passwordMatcValidatin]
+      validators: [this.passwordMatcValidatin, this.uppercaseValidator],
     });
   }
+
+  ngOnInit(): void {
+    const localData = localStorage.getItem('signUpUsers');
+    if (localData != null) {
+      this.signUpUsers = JSON.parse(localData);
+    }
+  }
+
 
   passwordMatcValidatin(form: FormGroup) {
     const password = form.get('password')
@@ -42,36 +43,40 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  uppercaseValidator(form: FormGroup) {
+    const password = form.get('password')
+    if (!/[A-Z]/.test(password?.value)) {
+      return { uppercase: true }
+    } else {
+      return null
+    }
+  }
 
-
-  ngOnInit(): void {
-    // const localData = localStorage.getItem('signUpUsers');
-    // if (localData != null) {
-    //   this.signUpUsers = JSON.parse(localData);
-    // }
+  userExsistValidator(email: string) {
+    const isUserExsist = this.signUpUsers?.find(m => m.email == email)
+    return isUserExsist
   }
 
   submit() {
-    console.log(this.regForm.value)
-    this.submitted = true;
+    this.regForm.value
+    if (this.userExsistValidator(this.regForm.value.email)) {
+      this.isUserExsist = true
+      alert("User already exist")
+    } else {
+      this.isUserExsist = false
+      this.submitted = true;
+      let formValue = this.regForm.value;
+      this.signUpUsers.push(formValue);
+      localStorage.setItem('signUpUsers', JSON.stringify(this.signUpUsers));
+      alert("registration succeeded")
+      this.reset();
+      this.router.navigate(['/login']);
+    }
   }
+
   reset() {
     this.submitted = false;
     this.regForm.reset();
-  }
-
-  onSignUp() {
-    let formValue = this.regForm.value;
-    console.log("11111", formValue)
-    this.signUpUsers.push(this.signupObj);
-    localStorage.setItem('signUpUsers', JSON.stringify(this.signUpUsers));
-    this.signupObj = {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    }
-
   }
 
   onLogin() {
