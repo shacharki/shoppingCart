@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit {
       validators: [this.passwordMatcValidatin, this.uppercaseValidator],
     });
   }
-
+  hide = true;
   ngOnInit(): void {
     const localData = localStorage.getItem('signUpUsers');
     if (localData != null) {

@@ -33,11 +33,11 @@ export class UserLoginComponent implements OnInit {
 
   onLogin() {
     const isUserExsist = this.signUpUsers.find(m => m.email == this.regForm.value.email && m.password == this.regForm.value.password)
+    console.log("4444444",isUserExsist)
     if (isUserExsist != undefined) {
-      alert('user login successfully');
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home'],{queryParams:{email:isUserExsist.email, name:isUserExsist.name}});
     } else {
-      alert('worng credentials');
+      alert('email or password are not correct');
     }
   }
 }

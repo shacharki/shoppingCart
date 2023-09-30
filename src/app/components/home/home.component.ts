@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -12,9 +12,12 @@ export class HomeComponent implements OnInit {
   products: any[] = [];
   subTotal!: any;
   isProducts: boolean = true;
+  emailUser: any;
+  nameUser: any;
   constructor(
-    private product_service: ProductService, 
-    private router: Router
+    private product_service: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
   ngOnInit() {
     this.product_service.getAllProducts().subscribe({
@@ -29,32 +32,39 @@ export class HomeComponent implements OnInit {
         console.log("Request Completed");
       },
     });
-    this.product_service.loadCart();
+    this.route.queryParamMap
+      .subscribe((params) => {
+        this.emailUser = params.get("email");
+        this.nameUser = params.get("name");
+        
+      }
+      );
+    this.product_service.loadCart(this.emailUser);
     this.products = this.product_service.getProduct();
   }
 
-  logout(){
+  logout() {
     this.router.navigate(['/login']);
 
   }
-  showCrat(){
+  showCrat() {
     this.isProducts = false
   }
-  showProduct(){
+  showProduct() {
     this.isProducts = true
   }
-  
-  addToCart(product: any){
+
+  addToCart(product: any) {
     if (!this.product_service.productInCart(product)) {
       product.quantity = 1;
-      this.product_service.addToCart(product);
+      this.product_service.addToCart(product, this.emailUser);
       this.products = [...this.product_service.getProduct()];
       this.subTotal = product.price;
     }
   }
 
   removeFromCart(product: any) {
-    this.product_service.removeProduct(product);
+    this.product_service.removeProduct(product ,this.emailUser);
     this.products = this.product_service.getProduct();
   }
   get total() {
@@ -66,5 +76,5 @@ export class HomeComponent implements OnInit {
       { quantity: 1, price: 0 }
     ).price;
   }
- 
+
 }

@@ -24,6 +24,9 @@
             <div *ngIf="regForm.get('password')!.errors?.['required']">
                 Password is required
             </div>
+			<div *ngIf="regForm.get('password')!.errors?.['minlength']">
+                Password is minimum 6 characters
+            </div>
         </div>
     </div>
 

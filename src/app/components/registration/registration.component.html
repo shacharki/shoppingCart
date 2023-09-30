@@ -26,9 +26,14 @@
         </div>
     </div>
 
+        <!-- <mat-form-field>
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field> -->
+
     <div class="form-group">
         <label>Password</label>
-        <input type="text" formControlName="password" class="form-control">
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control">
         <div class="text-danger"
             *ngIf="regForm.get('password')!.touched && regForm.get('password')!.invalid || regForm.get('password')!.invalid && submitted">
             <div *ngIf="regForm.get('password')!.errors?.['required']">

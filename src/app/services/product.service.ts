@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http'
 export class ProductService {
   products: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllProducts() {
     return this.http.get('assets/data.json');
@@ -16,29 +16,31 @@ export class ProductService {
     return this.products;
   }
 
-  saveCart(): void {
-    localStorage.setItem('cart_items', JSON.stringify(this.products));
+  saveCart(email: string): void {
+    localStorage.setItem(email, JSON.stringify(this.products));
   }
 
-  addToCart(addedProduct: any) {
+  addToCart(addedProduct: any, email: string) {
+    console.log("addedProduct", addedProduct)
+
     this.products.push(addedProduct);
-    this.saveCart();
+    this.saveCart(email);
   }
 
-  loadCart(): void {
-    this.products = JSON.parse(localStorage.getItem('cart_items') as any) || [];
+  loadCart(email: string): void {
+    this.products = JSON.parse(localStorage.getItem(email) as any) || [];
   }
 
   productInCart(product: any): boolean {
     return this.products.findIndex((x: any) => x.id === product.id) > -1;
   }
 
-  removeProduct(product: any) {
+  removeProduct(product: any, email: string) {
     const index = this.products.findIndex((x: any) => x.id === product.id);
 
     if (index > -1) {
       this.products.splice(index, 1);
-      this.saveCart();
+      this.saveCart(email);
     }
   }
 
