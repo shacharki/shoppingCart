@@ -1,8 +1,8 @@
 # build Shopping Cart App.
 
-Screen 1: User registration by adding: Name Field, Email Field, Password field, Confirm Password field. add Validate fields.
-Screen 2: User login by adding: Email Field, Password field. Verify the correctness of the fields
-Screen 3: accessible only after successful login. 2 icons:
+-Screen 1: User registration by adding: Name Field, Email Field, Password field, Confirm Password field. add Validate fields.
+-Screen 2: User login by adding: Email Field, Password field. Verify the correctness of the fields
+-Screen 3: accessible only after successful login. 2 icons:
   1. One leads to page with all product list (Name, Price , Image) with ‘Add
   button’.
   2. One leads to the shopping cart that display the list of products that was
