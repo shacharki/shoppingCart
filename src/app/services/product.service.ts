@@ -24,6 +24,14 @@ export class ProductService {
     this.products.push(addedProduct);
     this.saveCart(email);
   }
+  updateCart(newProduct: any, email: string) {
+    this.products.map(product => {
+      if( product == newProduct){
+        return product.quantity = newProduct.quantity
+      }
+    })
+    this.saveCart(email);
+  }
 
   loadCart(email: string): void {
     this.products = JSON.parse(localStorage.getItem(email) as any) || [];

@@ -62,7 +62,7 @@
                     </p>
                     <div>
                         <input [(ngModel)]="product.quantity" [ngModelOptions]="{standalone: true}" min="1"
-                            type="number" value="1" name="" class="form-control w-25" />
+                            type="number" value="1" name="" class="form-control w-25" (click)="updateQuantity(product)" />
                         <br />
                         <span>${{ product.quantity * product?.price | number : '1.2-2'}}</span>
                     </div>

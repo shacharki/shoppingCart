@@ -63,6 +63,7 @@ export class RegistrationComponent implements OnInit {
     if (this.userExsistValidator(this.regForm.value.email)) {
       this.isUserExsist = true
       alert("User already exist")
+      this.reset();
     } else {
       this.isUserExsist = false
       this.submitted = true;

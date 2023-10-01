@@ -77,4 +77,8 @@ export class HomeComponent implements OnInit {
     ).price;
   }
 
+  updateQuantity(product: any){
+    this.product_service.updateCart(product, this.emailUser);
+  }
+
 }
