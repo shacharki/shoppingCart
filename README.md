@@ -15,7 +15,7 @@ Type Script.
 NodeJs.
 Test using Playwright.
 HTML. 
-CSS.
+SCSS.
 Local Storage.
 
 # Development server
