@@ -25,6 +25,7 @@ export class RegistrationComponent implements OnInit {
     });
   }
   hide = true;
+  hidec = true;
   ngOnInit(): void {
     const localData = localStorage.getItem('signUpUsers');
     if (localData != null) {

@@ -1,8 +1,16 @@
 
+<head>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
 <form [formGroup]="regForm" class="form" (ngSubmit)="onLogin()">
     <h2 class="text-primary">Login</h2>
 
+
     <div class="form-group">
+		<i class="fa fa-envelope icon"></i>
         <label>Email</label>
         <input type="text" formControlName="email" class="form-control">
         <div class="text-danger"
@@ -17,8 +25,12 @@
     </div>
 
     <div class="form-group">
+		<i class="fa fa-lock icon"></i>
+
         <label>Password</label>
-        <input type="text" formControlName="password" class="form-control">
+        <input [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control">
+		<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
         <div class="text-danger"
             *ngIf="regForm.get('password')!.touched && regForm.get('password')!.invalid || regForm.get('password')!.invalid && submitted">
             <div *ngIf="regForm.get('password')!.errors?.['required']">

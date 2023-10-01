@@ -21,8 +21,6 @@ export class ProductService {
   }
 
   addToCart(addedProduct: any, email: string) {
-    console.log("addedProduct", addedProduct)
-
     this.products.push(addedProduct);
     this.saveCart(email);
   }

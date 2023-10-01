@@ -20,6 +20,7 @@ export class UserLoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
     }, );
   }
+  hide = true;
 
   ngOnInit(): void {
     const localData = localStorage.getItem('signUpUsers');
@@ -33,11 +34,11 @@ export class UserLoginComponent implements OnInit {
 
   onLogin() {
     const isUserExsist = this.signUpUsers.find(m => m.email == this.regForm.value.email && m.password == this.regForm.value.password)
-    console.log("4444444",isUserExsist)
     if (isUserExsist != undefined) {
       this.router.navigate(['/home'],{queryParams:{email:isUserExsist.email, name:isUserExsist.name}});
     } else {
       alert('email or password are not correct');
+      return
     }
   }
 }

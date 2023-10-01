@@ -1,9 +1,17 @@
 <form [formGroup]="regForm" class="form" (ngSubmit)="submit()">
     <h2 class="text-primary">Sign Up</h2>
 
+    <head>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </head>
+
+
     <div class="form-group">
+        <i class="fa fa-user icon"></i>
         <label>Name</label>
-        <input type="text" formControlName="name" class="form-control">
+        <input type="text" type="text" formControlName="name" class="form-control" required>
         <div class="text-danger"
             *ngIf="regForm.get('name')!.touched && regForm.get('name')!.invalid || regForm.get('name')!.invalid && submitted">
             <div *ngIf="regForm.get('name')!.errors?.['required']">
@@ -13,8 +21,9 @@
     </div>
 
     <div class="form-group">
+        <i class="fa fa-envelope icon"></i>
         <label>Email</label>
-        <input type="text" formControlName="email" class="form-control">
+        <input type="text" formControlName="email" class="form-control" required>
         <div class="text-danger"
             *ngIf="regForm.get('email')!.touched && regForm.get('email')!.invalid || regForm.get('email')!.invalid && submitted">
             <div *ngIf="regForm.get('email')!.errors?.['required']">
@@ -22,18 +31,15 @@
             </div>
             <div *ngIf="regForm.get('email')!.errors?.['email']">
                 Invalid Email
-            </div>    
+            </div>
         </div>
     </div>
 
-        <!-- <mat-form-field>
-        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
-        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </mat-form-field> -->
-
     <div class="form-group">
+        <i class="fa fa-lock icon"></i>
         <label>Password</label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control">
+        <input [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control" required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         <div class="text-danger"
             *ngIf="regForm.get('password')!.touched && regForm.get('password')!.invalid || regForm.get('password')!.invalid && submitted">
             <div *ngIf="regForm.get('password')!.errors?.['required']">
@@ -42,28 +48,28 @@
             <div *ngIf="regForm.get('password')!.errors?.['minlength']">
                 Password is minimum 6 characters
             </div>
-            <div *ngIf="regForm.errors?.['uppercase']">
+            <div *ngIf="regForm.errors?.['uppercase'] && !regForm.get('password')!.errors?.['required']">
                 Password must contain at least one capital letter
             </div>
         </div>
     </div>
 
     <div class="form-group">
+        <i class="fa fa-lock icon"></i>
         <label>Confirm Password</label>
-        <input type="text" formControlName="confirmPassword" class="form-control">
+        <input [type]="hidec ? 'password' : 'text'" formControlName="confirmPassword" class="form-control" required>
+        <mat-icon matSuffix (click)="hidec = !hidec">{{hidec ? 'visibility_off' : 'visibility'}}</mat-icon>
         <div class="text-danger"
             *ngIf="regForm.get('confirmPassword')!.touched && regForm.get('confirmPassword')!.invalid || regForm.get('confirmPassword')!.invalid && submitted">
-
             <div *ngIf="regForm.get('confirmPassword')!.errors?.['required']">
                 Confirm Password is required
             </div>
         </div>
         <div class="text-danger"
-            *ngIf="(submitted||regForm.get('confirmPassword')!.touched)&&regForm.errors?.['mismatch']">
+            *ngIf="!regForm.get('confirmPassword')!.errors?.['required'] && !regForm.get('password')!.errors?.['required'] && regForm.errors?.['mismatch']">
             Passwords not matched
         </div>
     </div>
-
 
     <div class="actions">
         <button class="btn btn-primary" [disabled]="regForm.invalid" type="submit">Register</button>
