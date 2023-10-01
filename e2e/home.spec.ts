@@ -6,7 +6,7 @@ test('home page test', async ({ page }) => {
     await page.goto(URL);
     await page.pause();
     await page.getByRole('button', { name: 'logout' }).click();
-    await expect(page).toHaveURL('http://localhost:4200/register');
+    await expect(page).toHaveURL('http://localhost:4200/login');
 });
 
 test('text visible', async ({ page }) => {

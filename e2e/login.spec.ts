@@ -11,6 +11,7 @@ test('login test', async ({ page }) => {
 
 test('only valid email', async ({ page }) => {
     await page.goto(URL);
+    await page.pause();
     const submitButton = page.locator('button[type="submit"]');
     await page.fill('input[type="text"]', 'aaa')
     await expect(submitButton).toBeDisabled();
@@ -18,6 +19,7 @@ test('only valid email', async ({ page }) => {
 
 test('hide password', async ({ page }) => {
     await page.goto(URL);
+    await page.pause();
     const locator = page.locator('testPASS');
     await page.getByText('visibility_off').click();
     await expect(locator).toBeHidden();
@@ -25,12 +27,14 @@ test('hide password', async ({ page }) => {
 
 test('text visible', async ({ page }) => {
     await page.goto(URL);
+    await page.pause();
     await expect(page.getByText('Password')).toBeVisible();
     await expect(page.getByText('Email')).toBeVisible();
 });
 
 test('error', async ({ page }) => {
     await page.goto(URL);
+    await page.pause();
     await page.locator('input[type="text"]').fill('test@gmail.com');
     await page.locator('input[type="password"]').fill('testPASS');
     expect('test@gmail.com').not.toContain('error');
@@ -40,6 +44,7 @@ test('error', async ({ page }) => {
 test('login process', async ({ page }) => {
 
     await page.goto(URL);
+    
     //add valid email
     await page.locator('input[type="text"]').click();
     await page.locator('input[type="text"]').fill('shachar@gmail.com');
